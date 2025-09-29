@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
-// exact base for your project site:
 const PROJECT_BASE = process.env.PROJECT_BASE || "/Graph-Algorithms-Visualizer/";
 
 module.exports = {
@@ -12,7 +11,7 @@ module.exports = {
 		filename: isProd ? "assets/[name].[contenthash].js" : "assets/[name].js",
 		path: path.resolve(__dirname, "dist"),
 		clean: true,
-		publicPath: isProd ? PROJECT_BASE : "/" // ← critical for GH Pages
+		publicPath: isProd ? PROJECT_BASE : "/"
 	},
 	resolve: {
 		extensions: [".tsx", ".ts", ".js"]
@@ -27,13 +26,12 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: "public/index.html", // make sure this exists
-			favicon: "public/favicon.ico" // optional
+			template: "public/index.html"
 		})
 	],
 	devServer: {
 		static: { directory: path.join(__dirname, "dist") },
-		historyApiFallback: true, // SPA refresh in dev
+		historyApiFallback: true,
 		compress: true,
 		port: 9003,
 		open: true
